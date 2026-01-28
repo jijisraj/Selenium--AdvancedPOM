@@ -4,3 +4,9 @@ test-output/
 .project
 .settings/
 *.log
+reports/
+screenshots/
+logs/
+test-output/
+.factorypath
+null

@@ -16,13 +16,14 @@ public class DriverManager {
     public static void quitDriver() {
         if (driver.get() != null) {
             driver.get().quit();
-          //  driver.remove();
+           
             
         }
-        
+        driver.remove();
         }
+    /**
     public static void unload() {
         driver.remove();
-    }
+    } **/
 
 }
