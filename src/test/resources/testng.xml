@@ -1,15 +1,12 @@
 <suite name="AdvancedPOM">
-    <test name="ChromeTest">
-        <parameter name="browser" value="chrome"/>
+ <listeners>
+        <listener class-name="com.jiji.listener.TestListener"/>
+    </listeners>
+    <test name="LoginTests">
+    <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.jiji.test.LoginTest"/>
         </classes>
     </test>
-
-    <test name="EdgeTest">
-        <parameter name="browser" value="edge"/>
-        <classes>
-            <class name="com.jiji.test.LoginTest"/>
-        </classes>
-    </test>
+    
 </suite>
