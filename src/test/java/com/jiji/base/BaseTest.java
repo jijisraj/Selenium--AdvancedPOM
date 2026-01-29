@@ -27,11 +27,17 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 	 protected Logger log = LogManager.getLogger(this.getClass());
+	 private static ExtentReports extent;
 	protected  WebDriver driver;
 	public WebDriver getDriver() {
 		return driver;
 	}
-    
+	@BeforeSuite
+	public void setupReport() {
+	    System.out.println("Initializing Extent Report...");
+	    extent = ExtentManager.getInstance();
+	}
+
 	    @BeforeMethod
 	    @Parameters("browser")
 	    public void setup(Method method,@Optional("Chrome")String browser) {
@@ -75,6 +81,13 @@ public class BaseTest {
 	       DriverManager.quitDriver();
 	       log.info("========= TEST END: " + method.getName() + " =========\n");
 	    }
-	    
+	    @AfterSuite
+	    public void tearDownReport() {
+	        if (extent != null) {
+	            extent.flush();
+	            System.out.println("Extent Report Flushed");
+	        }
+	    }
+
 	   
 }
