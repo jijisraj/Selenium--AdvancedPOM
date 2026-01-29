@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -45,7 +46,10 @@ public class BaseTest {
 	        
 	            else if (browser.equalsIgnoreCase("chrome")) {
 	            WebDriverManager.chromedriver().setup();
-	            driver = new ChromeDriver();
+	            ChromeOptions options = new ChromeOptions();
+	            options.addArguments("--remote-allow-origins=*");
+	            driver = new ChromeDriver(options);
+	           // driver = new ChromeDriver();
 	        } else if (browser.equalsIgnoreCase("edge")) {
 	            WebDriverManager.edgedriver().setup();
 	            driver = new EdgeDriver();

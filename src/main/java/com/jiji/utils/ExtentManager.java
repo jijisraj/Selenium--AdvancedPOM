@@ -11,18 +11,20 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ExtentManager {
 	private static ExtentReports extent;
 		public static ExtentReports getInstance() {
+			
+
+		if(extent==null) {
 			File reportDir = new File(System.getProperty("user.dir") + "/reports");
 			if (!reportDir.exists()) {
 			    reportDir.mkdirs();
 			}
-
-		if(extent==null) {
 			String timestamp =
                     new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
             String reportPath =
                     System.getProperty("user.dir")
                     + "/reports/ExtentReport_" + timestamp + ".html";
+            System.out.println("Report Path: " + reportPath);
 			ExtentSparkReporter spark=new ExtentSparkReporter(reportPath);
 			 spark.config().setReportName("Automation Test Report");
 	            spark.config().setDocumentTitle("Test Execution Report");
