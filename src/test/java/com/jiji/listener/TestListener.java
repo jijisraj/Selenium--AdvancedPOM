@@ -19,14 +19,16 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class TestListener implements ITestListener {
+	//private static ExtentReports extent;
 
-    //ExtentReports extent = ExtentManager.getReport();
-    //ExtentTest test;
 	private static final Logger log = LogManager.getLogger(TestListener.class);
 
 	private static ExtentReports extent = ExtentManager.getInstance();
     private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
-   
+    @Override
+    public void onStart(ITestContext context) {
+        System.out.println("=== TEST SUITE STARTED ===");
+    }
     public void onTestStart(ITestResult result) {
     	System.out.println("🔥 LISTENER WORKING for: " + result.getMethod().getMethodName());
     ExtentTest    extenttest = extent.createTest(result.getMethod().getMethodName());
@@ -78,21 +80,7 @@ public class TestListener implements ITestListener {
 
         
     }
-/**
-        try {
-            Field field = testClass.getClass().getSuperclass()
-                    .getDeclaredField("driver");
-            field.setAccessible(true);
-            driver = (WebDriver) field.get(testClass);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (driver != null) {
-            ScreenShotUtils.captureScreenshot(driver, result.getName());
-        } 
-    **/
    
     public void onFinish(ITestContext context) {
         extent.flush();
